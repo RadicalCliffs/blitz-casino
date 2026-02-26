@@ -1,0 +1,17 @@
+<svg width="184" height="56" viewBox="0 0 184 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Lightning Bolt Icon -->
+  <path d="M28 4L12 30H24L20 52L40 22H28L32 4H28Z" fill="url(#lightning-gradient)" stroke="#FFD700" stroke-width="1"/>
+  
+  <!-- BLITZ Text -->
+  <text x="52" y="38" font-family="Arial Black, Arial, sans-serif" font-size="32" font-weight="900" fill="#FFFFFF" letter-spacing="2">
+    BLITZ
+  </text>
+  
+  <defs>
+    <linearGradient id="lightning-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6B00;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>
