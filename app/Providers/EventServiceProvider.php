@@ -19,10 +19,6 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-            // ... other providers
-            'SocialiteProviders\\VKontakte\\VKontakteExtendSocialite@handle',
-            'SocialiteProviders\\Telegram\\TelegramExtendSocialite@handle',
-            'SocialiteProviders\\Yandex\\YandexExtendSocialite@handle',
             'SocialiteProviders\\Google\\GoogleExtendSocialite@handle',
         ],
     ];
@@ -35,7 +31,5 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-        //
     }
 }

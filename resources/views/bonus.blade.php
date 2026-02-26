@@ -13,8 +13,7 @@
 							</div>
 						</div>
 						<div class="bonus__buttons d-flex align-center">
-							<a href="#" onclick="disable(this);getBonusTg(this)" class="btn btn--blue is-ripples flare d-flex align-center"><span>Get</span></a>
-							<a href="#" onclick="open_link('https://t.me/{{\App\Setting::first()->tg_id}}')" class="btn is-ripples flare d-flex align-center">TG</a>
+							<a href="#" onclick="disable(this);getBonus(this)" class="btn btn--blue is-ripples flare d-flex align-center"><span>Get Daily Bonus</span></a>
 						</div>
 					</div>
 				</div>

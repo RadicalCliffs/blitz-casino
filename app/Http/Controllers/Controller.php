@@ -21,7 +21,6 @@ use App\User;
 use App\Crash;
 use App\Shoot;
 use Auth;
-use VK\Client\VKApiClient;
 
 class Controller extends BaseController
 {
@@ -37,14 +36,7 @@ class Controller extends BaseController
             return $next($request);
         });
 
-        Carbon::setLocale('ru');
-    }
-
-    public function testPublishInGroup(){
-        // $VK_KEY = ""; 
-        // $VERSION = "5.81"; 
-        // $publicID = -;
-        // $vk = new VkApi($VK_KEY, $VERSION);
+        Carbon::setLocale('en');
     }
 
     public function changeBalance(Request $r){
@@ -704,153 +696,5 @@ if($user->type_balance == 1){
         return response(['success' => true, 'mess' => "Bonus received successfully!", 'newbalance' => "{$newbalance}", 'lastbalance' => "{$lastbalance}"]);
 
     }
-
-    public static function isMessages($id) {
-        $setting = Setting::first();
-        $grid = $setting->group_id;
-        $grtok = $setting->group_token;
-
-        $count = 0;
-        try {
-            $i = 0;
-            $arr = json_decode(file_get_contents("https://api.vk.com/method/messages.getHistory?access_token=". $grtok ."&group_id=". $grid ."&user_id=". $id . "&v=5.103"), true);
-            return isset($arr['error']) ? false : ($arr['response']['count'] == 0 ? false : true);
-            //foreach($arr['response']['items'] as $item) {
-             //   $has = ($item['text'] == "+" ? true : false);
-           // }
-
-            //return $has;
-        } catch (\Exception $e) {
-            return false;
-        }
-    }
-
-    public function bonusGetVk(Request $request){
-        if(\Auth::guest()){return response(['success' => false, 'mess' => 'Please log in' ]);}
-
-        $user = \Auth::user();
-if($user->type_balance == 1){
-            return response(['success' => false, 'mess' => 'Switch to real balance']);
-        }
-        if(\Cache::has('action.user.' . $user->id)) return response(['success' => false, 'mess' => 'Please wait before the previous action!' ]);
-        \Cache::put('action.user.' . $user->id, '', 1);
-
-        $bonus_1 = $user->bonus_1;
-        if ($bonus_1 == 1){ return response(['success' => false, 'mess' => 'You already claimed this bonus' ]);}
-
-        $setting = Setting::first();
-        $grid = $setting->group_id;
-        $grtok = $setting->group_token;
-
-        $domainvk = $user->vk_id;
-
-        $vk1 = json_decode(file_get_contents("https://api.vk.com/method/users.get?user_ids={$domainvk}&access_token=".$grtok."&v=5.131"));
-        $vk1 = $vk1->response[0]->id ?? 0;
-
-        if($vk1 == 0){
-            return response(['success' => false, 'mess' => "VK authentication error" ]);
-        }
-        $resp = file_get_contents("https://api.vk.com/method/groups.isMember?group_id=".$grid."&user_id={$vk1}&access_token=".$grtok."&v=5.131");
-        $data = json_decode($resp, true);
-        if($data['response'] != '1'){ return response(['success' => false, 'link' => $setting->group_link, 'mess' => 'Subscribe to our VK group first!' ]);}
-        if(!$this->isMessages($user->vk_id)) return response()->json(['success' => false, 'mess' => 'Send "+" in group messages to get the bonus']);
-
-        if(!(\Cache::has('user.'.$user->id.'.historyBalance'))){ \Cache::put('user.'.$user->id.'.historyBalance', '[]'); }
-
-        $hist_balance = array(
-            'user_id' => $user->id,
-            'type' => 'VK Bonus',
-            'balance_before' => $user->balance,
-            'balance_after' => $user->balance + $setting->bonus_group,
-            'date' => date('d.m.Y H:i')
-        );
-
-        $cashe_hist_user = \Cache::get('user.'.$user->id.'.historyBalance');
-
-        $cashe_hist_user = json_decode($cashe_hist_user);
-        $cashe_hist_user[] = $hist_balance;
-        $cashe_hist_user = json_encode($cashe_hist_user);
-        \Cache::put('user.'.$user->id.'.historyBalance', $cashe_hist_user);
-        $user->bonus_up = 1;
-        $newbalance = $user->balance + $setting->bonus_group;
-        $lastbalance = $user->balance;
-        $user->balance += $setting->bonus_group;
-        $user->bonus_1 = 1;
-        $user->save();
-
-        return response(['success' => true, 'mess' => "Bonus received successfully!", 'newbalance' => "{$newbalance}", 'lastbalance' => "{$lastbalance}"]);
-
-
-    }
-    public function bonusGet(Request $request){
-        if(\Auth::guest()){return response(['success' => false, 'mess' => 'Please log in' ]);}
-
-        $user = \Auth::user();
-if($user->type_balance == 1){
-            return response(['success' => false, 'mess' => 'Switch to real balance']);
-        }
-        if(\Cache::has('action.user.' . $user->id)) return response(['success' => false, 'mess' => 'Please wait before the previous action!' ]);
-        \Cache::put('action.user.' . $user->id, '', 1);
-
-        if(!$this->isMessages($user->vk_id)) return response()->json(['success' => false, 'mess' => 'Send "+" in group messages to get the bonus']);
-
-        $user_deps = Payment::where('status', 1)->where('user_id', $user->id)->whereDate('created_at', '>', Carbon::now()->subDays(7))->sum('sum');
-
-        if($user_deps < 0){
-            return response(['success' => false, 'mess' => 'Bonus requires minimum deposit of 0 in the last 7 days. Your deposits: '.$user_deps]);
-        }
-
-
-        $bdate = $user->bdate;
-        $time = time();
-        $f_time = $time - $bdate;
-        $w_time = 43200 - $f_time;
-        $seconds = $w_time; // Calculate remaining seconds
-        $minutes = floor($seconds / 60); // Calculate minutes
-        $hours = floor($minutes / 60); // Calculate remaining hours
-        $minutes = $minutes - ($hours * 60);  // Calculate remaining minutes
-        $sec = $seconds % 60;
-        if($sec < 10){ $sec = '0'.$sec; }
-        if($hours < 10){ $hours = '0'.$hours; }
-        if($minutes < 10){ $minutes = '0'.$minutes; }
-        $w__time = $hours.':'.$minutes.':'.$sec; // Format time as 12:34:56
-
-        if($f_time < 43200){return response(['success' => false, 'mess' => "Wait {$w__time}" ]);}
-
-        $bonuses = [1, 3, 5, 8, 10, 15, 25, 50];
-        $rand_b = rand(0, 2);
-        $rand = $bonuses[$rand_b];
-
-        $rotate = 360 / 8 * (count($bonuses) - $rand_b) + (360 * 3);
-        
-        if(!(\Cache::has('user.'.$user->id.'.historyBalance'))){ \Cache::put('user.'.$user->id.'.historyBalance', '[]'); }
-
-        $hist_balance = array(
-            'user_id' => $user->id,
-            'type' => '??????in??? Bonus',
-            'balance_before' => $user->balance,
-            'balance_after' => $user->balance + $rand,
-            'date' => date('d.m.Y H:i')
-        );
-
-        $cashe_hist_user = \Cache::get('user.'.$user->id.'.historyBalance');
-
-        $cashe_hist_user = json_decode($cashe_hist_user);
-        $cashe_hist_user[] = $hist_balance;
-        $cashe_hist_user = json_encode($cashe_hist_user);
-        \Cache::put('user.'.$user->id.'.historyBalance', $cashe_hist_user);
-
-        $user->bonus_up = 1;
-
-        $newbalance = $user->balance + $rand;
-        $lastbalance = $user->balance;
-        $user->balance += $rand;
-        $user->bdate = time();
-        $user->save();
-
-        return response(['success' => true, 'mess' => "???????? {$rand}", 'newbalance' => "{$newbalance}", 'rotate' => "{$rotate}", 'lastbalance' => "{$lastbalance}" ]);
-
-    }
-
 
 }

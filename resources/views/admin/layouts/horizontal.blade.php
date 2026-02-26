@@ -192,9 +192,6 @@
                 <button type="button" class="btn header-item waves-effect"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     @switch(Session::get('lang'))
-                        @case('ru')
-                            <img src="{{ URL::asset('/assets/images/flags/russia.jpg')}}" alt="Header Language" height="16"> <span class="align-middle">Russian</span>
-                        @break
                         @case('it')
                             <img src="{{ URL::asset('/assets/images/flags/italy.jpg')}}" alt="Header Language" height="16"> <span class="align-middle">Italian</span>
                         @break
@@ -227,11 +224,6 @@
                     <!-- item-->
                     <a href="{{ url('index/it') }}" class="dropdown-item notify-item language" data-lang="it">
                         <img src="{{ URL::asset ('/assets/images/flags/italy.jpg') }}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
-                    </a>
-    
-                    <!-- item-->
-                    <a href="{{ url('index/ru') }}" class="dropdown-item notify-item language" data-lang="ru">
-                        <img src="{{ URL::asset ('/assets/images/flags/russia.jpg') }}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
                     </a>
                 </div>
             </div>

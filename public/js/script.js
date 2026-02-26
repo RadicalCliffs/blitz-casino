@@ -842,21 +842,6 @@ function checkTgConnect(that) {
 
 	});
 }
-function getBonusTg(that) {
-	$.post('/bonus/tg',{_token: csrf_token}).then(e=>{
-		undisable(that)
-		if(e.modal){
-			showPopup('popup--tg')
-		}
-		if(e.success){
-			notification('success', e.mess)
-			balanceUpdate(e.lastbalance, e.newbalance)      
-		}else{
-			notification('error', e.mess)
-		}
-
-	});
-}
 
 function getBonus(that) {
 	$.post('/bonus/get',{_token: csrf_token}).then(e=>{

