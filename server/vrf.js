@@ -8,15 +8,16 @@
 const { ethers } = require('ethers');
 require('dotenv').config({ path: '../.env' });
 
-// VRF Configuration from environment
+// VRF Configuration from environment - ALL values MUST come from .env file
+// DO NOT HARDCODE ANY WALLET ADDRESSES OR PRIVATE KEYS
 const VRF_CONFIG = {
-    adminWallet: process.env.VRF_ADMIN_WALLET || '0x8010f8e4e0a3aa79bef0f1064c7ce875b529fd4f',
-    subscriptionId: process.env.VRF_SUBSCRIPTION_ID || '102276066210229442467402580816872603576154691993717069716093872643286318982389',
-    consumerContract: process.env.VRF_CONSUMER_CONTRACT || '0xc5dfc3f6a227b30161f53f0bc167495158854854',
-    coordinator: process.env.VRF_COORDINATOR || '0xd5D517aBE5cF79B7e95eC98dB0f0277',
-    keyHash2Gwei: process.env.VRF_KEY_HASH_2GWEI || '0x00b81b5a830cb0a4009fbd8904de511e28631e62ce5ad231373d3cdad373ccab',
-    keyHash30Gwei: process.env.VRF_KEY_HASH_30GWEI || '0xdc2f87677b01473c763cb0aee938ed3341512f6057324a584e5944e786144d70',
-    adminSecret: process.env.VRF_ADMIN_SECRET || '0xbbd7b4c81cadd561f24646259bf6cce08ed1d95e7be762473c5d372733338138'
+    adminWallet: process.env.VRF_ADMIN_WALLET || '', // REQUIRED: Set in .env
+    subscriptionId: process.env.VRF_SUBSCRIPTION_ID || '', // REQUIRED: Set in .env  
+    consumerContract: process.env.VRF_CONSUMER_CONTRACT || '', // REQUIRED: Set in .env
+    coordinator: process.env.VRF_COORDINATOR || '', // REQUIRED: Set in .env
+    keyHash2Gwei: process.env.VRF_KEY_HASH_2GWEI || '', // REQUIRED: Set in .env
+    keyHash30Gwei: process.env.VRF_KEY_HASH_30GWEI || '', // REQUIRED: Set in .env
+    adminSecret: process.env.VRF_ADMIN_SECRET || '' // REQUIRED: Set in .env - NEVER COMMIT!
 };
 
 // VRF Coordinator ABI (minimal for randomness requests)
