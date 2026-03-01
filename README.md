@@ -35,12 +35,38 @@ Blitz Casino stands out in the crowded online casino market thanks to its cuttin
 - **Secure and Reliable**: Built with the latest security protocols, Blitz ensures a safe gaming experience for all users, protecting data and transactions at all times.
 - **Scalable Solution**: Whether you're just starting out or scaling up, Blitz Casino can grow with you. Add new games, features, and expand your player base without hassle.
 
-## 🚀 **How to Run Blitz Casino Locally**
+## 🚀 **Quick Start**
+
+### Installation
+
+```bash
+# Install dependencies
+composer install
+npm install
+
+# Configure environment
+cp .env.example .env
+# Edit .env with your database credentials
+
+# Build assets
+npm run production
+
+# Setup database
+mysql -u root -p
+CREATE DATABASE blitz_casino;
+EXIT;
+mysql -u your_user -p blitz_casino < database_schema.sql
+```
+
+### Running Locally
 
 1. Start MySQL and Redis services
 2. Start the PHP server: `php artisan serve`
 3. Start the Node.js game server: `cd server && node app.js`
 4. Visit http://localhost:8000
+
+📖 **For detailed setup instructions, see [SETUP.md](SETUP.md)**  
+🚀 **For deployment options, see [DEPLOYMENT.md](DEPLOYMENT.md)**
 
 ## 🌐 **Get Started with Blitz Casino Today!**
 
