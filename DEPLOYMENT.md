@@ -180,7 +180,122 @@ Host PHP backend + Node.js server separately on:
 
 ---
 
-## Option 3: Docker Deployment
+## Option 3: Free PHP Hosting Alternatives
+
+**Best for**: Testing, learning, or low-traffic deployments
+
+### 🆓 Recommended Free Platforms:
+
+#### 1. **Railway.app** (Recommended)
+- ✅ $5 free credits per month
+- ✅ Auto-deploys from GitHub
+- ✅ Supports PHP, MySQL, Redis
+- ✅ Easy environment variables setup
+- ✅ Custom domains on free tier
+
+**Setup Steps:**
+```bash
+# 1. Sign up at railway.app
+# 2. Create new project from GitHub repo
+# 3. Add MySQL and Redis services
+# 4. Set environment variables from .env.example
+# 5. Deploy automatically on push
+```
+
+#### 2. **Render.com**
+- ✅ Free tier for web services
+- ✅ PostgreSQL database included
+- ✅ Auto-deploy from GitHub
+- ✅ Custom domains
+- ⚠️ Spins down after inactivity (wakes on request)
+
+**Setup Steps:**
+```bash
+# 1. Sign up at render.com
+# 2. New Web Service → Connect GitHub repo
+# 3. Build Command: composer install && npm run production
+# 4. Start Command: php artisan serve --host=0.0.0.0 --port=$PORT
+# 5. Add PostgreSQL database (free tier)
+# 6. Set environment variables
+```
+
+#### 3. **Fly.io**
+- ✅ Free tier: 3 shared VMs, 3GB storage
+- ✅ PostgreSQL/MySQL support
+- ✅ Global edge network
+- ✅ Good for Node.js game server too
+
+**Setup Steps:**
+```bash
+# Install flyctl
+curl -L https://fly.io/install.sh | sh
+
+# Login and initialize
+flyctl auth login
+flyctl launch
+
+# Add MySQL
+flyctl mysql create
+
+# Deploy
+flyctl deploy
+```
+
+#### 4. **InfinityFree**
+- ✅ Unlimited free PHP hosting
+- ✅ MySQL database included
+- ✅ cPanel for management
+- ✅ No ads
+- ⚠️ Shared hosting (slower performance)
+- ⚠️ No SSH access (FTP only)
+
+**Setup Steps:**
+1. Sign up at infinityfree.net
+2. Create hosting account
+3. Upload files via FTP to `htdocs/`
+4. Import database via phpMyAdmin
+5. Configure `.env` with database credentials
+
+#### 5. **000webhost**
+- ✅ Free PHP + MySQL
+- ✅ 300MB storage, 3GB bandwidth
+- ✅ One-click WordPress/Laravel installer
+- ⚠️ Shows ads on free tier
+- ⚠️ Limited resources
+
+### ⚠️ Important Limitations of Free Hosting:
+
+1. **Performance**: Slower than paid hosting, shared resources
+2. **Uptime**: May have occasional downtime
+3. **Support**: Limited or community-only support
+4. **Redis**: Most free hosts don't support Redis (can use database for cache)
+5. **Node.js Server**: Game server may need separate hosting
+6. **SSL**: Free hosts usually provide SSL, but some require upgrade
+7. **Domain**: Custom domains may require paid upgrade
+
+### Workarounds for Free Hosting:
+
+**If Redis is not available:**
+```bash
+# In .env, change to:
+CACHE_DRIVER=database
+SESSION_DRIVER=database
+QUEUE_CONNECTION=database
+```
+
+**For Node.js game server separately:**
+- Host on Glitch.com (free Node.js hosting)
+- Use Railway.app or Render for Node.js
+- Connect via WebSocket to your PHP backend
+
+**Database-only free services:**
+- **PlanetScale** - Free MySQL database (5GB)
+- **ElephantSQL** - Free PostgreSQL (20MB)
+- **MongoDB Atlas** - Free MongoDB (512MB)
+
+---
+
+## Option 4: Docker Deployment
 
 **Best for**: Consistent environments and easy scaling
 
@@ -190,7 +305,7 @@ Host PHP backend + Node.js server separately on:
 
 ---
 
-## Option 4: Serverless/Hybrid
+## Option 5: Serverless/Hybrid
 
 **Frontend**: Netlify/Vercel/CloudFlare Pages  
 **Backend API**: AWS Lambda + API Gateway  
