@@ -12,5 +12,5 @@
 
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/netlify-landing.html"
   status = 200

@@ -1,5 +1,5 @@
 # Netlify redirects file
 # https://docs.netlify.com/routing/redirects/
 
-# Redirect all requests to index.html
-/*      /index.html   200
+# Redirect all requests to netlify-landing.html (landing page for Netlify-only deployments)
+/*      /netlify-landing.html   200
