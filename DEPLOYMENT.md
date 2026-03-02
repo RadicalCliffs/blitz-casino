@@ -37,7 +37,7 @@
 **Best for**: Full-featured deployment with PHP + Node.js
 
 ### Requirements:
-- PHP 7.2.5+, 8.0, 8.1, or 8.2 (Laravel 7 compatibility - see PHP_COMPATIBILITY.md)
+- PHP 7.2.5-7.x, 8.0.x, 8.1.x, or 8.2.x (Laravel 7 compatibility - see PHP_COMPATIBILITY.md)
 - MySQL 5.7+ or MySQL 8.x
 - Redis Server
 - Node.js 14+
