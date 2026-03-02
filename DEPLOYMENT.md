@@ -213,17 +213,22 @@ Host PHP backend + Node.js server separately on:
 ```bash
 # 1. Sign up at render.com
 # 2. New Web Service → Connect GitHub repo
-# 3. Environment: Docker (recommended) or Native
+# 3. Environment: Native (auto-detects PHP)
 # 4. Build Command: composer install --no-dev && npm run production
-# 5. For Native Environment:
-#    - Render auto-detects PHP and uses appropriate server
-#    - Or specify: heroku-php-apache2 public/
+# 5. Render auto-detects PHP and uses appropriate server
 # 6. Add PostgreSQL database (free tier)
 # 7. Set environment variables from .env.example
 # 8. Run migrations via shell: php artisan migrate
 ```
 
-**Note**: Render supports multiple deployment methods. Native environment auto-detects PHP. For more control, use a Dockerfile.
+**Alternative: Using Docker** (for more control)
+```dockerfile
+# Create Dockerfile in project root
+FROM php:8.1-apache
+COPY . /var/www/html
+RUN composer install --no-dev
+RUN npm run production
+```
 
 #### 3. **Fly.io**
 - ✅ Free tier: 3 shared VMs, 3GB storage
@@ -291,7 +296,7 @@ QUEUE_CONNECTION=database
 
 **For Node.js game server separately:**
 - **Railway.app or Render** - Recommended for production (always-on)
-- **Glitch.com** - Free but sleeps after 5 min inactivity (not ideal for real-time games)
+- **Glitch.com** - Free but sleeps after 5 minutes of inactivity (not ideal for real-time games)
 - **Fly.io** - Free tier with better uptime than Glitch
 - Update environment variables on both services:
   - PHP backend: Set `SOCKET_SERVER_URL=https://your-node-server.com`
