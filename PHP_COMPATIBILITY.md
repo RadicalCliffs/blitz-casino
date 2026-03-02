@@ -2,9 +2,9 @@
 
 ## Supported PHP Versions
 
-This application supports PHP versions: **7.2.5+, 8.0, 8.1, and 8.2**
+This application supports PHP versions: **7.2.5 through 7.x, 8.0.x, 8.1.x, and 8.2.x**
 
-The `composer.json` file explicitly declares support for these versions to ensure compatibility with deployment platforms like Railway.app.
+The `composer.json` file explicitly declares support for these versions (`^7.2.5|^8.0|^8.1|^8.2`) to ensure compatibility with deployment platforms like Railway.app.
 
 ## Known Issues with Laravel 7 on PHP 8.3+
 
