@@ -1,8 +1,16 @@
-# PHP 8.3 Compatibility Notes
+# PHP Compatibility Notes
 
-## Known Issues with Laravel 7 on PHP 8.3
+## Supported PHP Versions
 
-Laravel 7 was released before PHP 8.3 and has some compatibility issues. While the application runs successfully in production (as noted in the README), there are some type hint incompatibilities that cause errors with strict PHP 8.3.
+This application supports PHP versions: **7.2.5 and above in the 7.x series, 8.0.x, 8.1.x, and 8.2.x**
+
+The `composer.json` file explicitly declares support for these versions (`^7.2.5|^8.0|^8.1|^8.2`) to ensure compatibility with deployment platforms like Railway.app.
+
+## Known Issues with Laravel 7 on PHP 8.3+
+
+Laravel 7 was released before PHP 8.3 and has some compatibility issues. While the application runs successfully in production (as noted in the README), there are some type hint incompatibilities that cause errors with strict PHP 8.3+.
+
+**Current Recommendation:** Use PHP 8.2 or earlier for best compatibility.
 
 ### Solutions
 
