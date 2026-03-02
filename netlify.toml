@@ -1,0 +1,16 @@
+[build]
+  command = "npm run production"
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "14"
+
+# Netlify redirects
+# Note: This is a Laravel PHP application that requires server-side processing
+# Netlify is a static hosting service and CANNOT execute PHP code
+# For proper functionality, deploy to PHP-compatible hosting (Heroku, DigitalOcean, AWS, VPS)
+
+[[redirects]]
+  from = "/*"
+  to = "/netlify-landing.html"
+  status = 200
