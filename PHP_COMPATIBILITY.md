@@ -2,21 +2,20 @@
 
 ## Supported PHP Versions
 
-This application requires PHP **8.2+** (PHP 8.2 through 8.5 are supported).
+This application requires PHP **8.2+** (PHP 8.2 is tested and recommended; 8.3-8.5 are allowed for deployment flexibility).
 
-The `composer.json` file explicitly declares support for PHP `>=8.2 <8.6` to ensure compatibility with modern deployment platforms like Railway.app.
+The `composer.json` file declares support for PHP `>=8.2 <8.6` to ensure compatibility with modern deployment platforms like Railway.app that may use newer PHP versions.
 
 ## Why PHP 8.2+?
 
-Laravel 7, while powerful, continues to work with modern PHP versions. To maintain a balance between modern PHP features and stability, this project supports:
+Laravel 7 was designed for earlier PHP versions but can work with PHP 8.2+. To maintain a balance between modern PHP features and stability, this project allows:
 
-- **Modern Platform Support**: Railway and other modern deployment platforms support PHP 8.2+
+- **Modern Platform Support**: Railway and other modern deployment platforms may use PHP 8.2+
 - **Security**: PHP 7.x and 8.0/8.1 are end-of-life and no longer receive security updates
 - **Performance**: PHP 8.2+ offers significant performance improvements over older versions
-- **Dependency Compatibility**: The locked dependencies work with PHP 8.2+
-- **Stability**: Laravel 7 is compatible with PHP 8.2+ with proper configuration
+- **Flexibility**: Allows deployment on platforms that have upgraded to newer PHP versions
 
-**Current Recommendation:** Use PHP 8.2+ for production deployments.
+**Current Recommendation:** Use PHP 8.2 for production deployments (most tested). PHP 8.3+ may work but should be tested thoroughly before production use.
 
 ### Solutions
 
@@ -46,17 +45,17 @@ The application works in production environments where:
 
 ### Current Status
 
-✅ **Web Application**: Works with PHP-FPM 8.2+  
+✅ **Web Application**: Works with PHP-FPM 8.2 (tested), 8.3-8.5 (compatibility allowed)
 ✅ **Node.js Game Server**: Fully functional  
 ✅ **Asset Building**: Works perfectly  
 ✅ **Database**: Compatible  
-✅ **Artisan Commands**: Fully functional on PHP 8.2+
-✅ **PHP 8.2-8.5**: Supported
+✅ **Artisan Commands**: Fully functional on PHP 8.2
+⚠️ **PHP 8.3-8.5**: Allowed but should be tested before production use
 
 ### For Development
 
 Development requirements:
-1. PHP 8.2+ (PHP 8.2 through 8.5 supported)
+1. PHP 8.2+ (PHP 8.2 tested, 8.3-8.5 allowed for deployment flexibility)
 2. Composer 2.x
 3. Node.js 14+
 4. MySQL 5.7+ or 8.x
