@@ -213,13 +213,17 @@ Host PHP backend + Node.js server separately on:
 ```bash
 # 1. Sign up at render.com
 # 2. New Web Service → Connect GitHub repo
-# 3. Build Command: composer install --no-dev && npm run production
-# 4. Start Command: heroku-php-apache2 public/
-#    Note: Render supports Heroku buildpacks for PHP
-# 5. Add PostgreSQL database (free tier)
-# 6. Set environment variables from .env.example
-# 7. Run migrations: php artisan migrate (via shell access)
+# 3. Environment: Docker (recommended) or Native
+# 4. Build Command: composer install --no-dev && npm run production
+# 5. For Native Environment:
+#    - Render auto-detects PHP and uses appropriate server
+#    - Or specify: heroku-php-apache2 public/
+# 6. Add PostgreSQL database (free tier)
+# 7. Set environment variables from .env.example
+# 8. Run migrations via shell: php artisan migrate
 ```
+
+**Note**: Render supports multiple deployment methods. Native environment auto-detects PHP. For more control, use a Dockerfile.
 
 #### 3. **Fly.io**
 - ✅ Free tier: 3 shared VMs, 3GB storage
@@ -286,12 +290,15 @@ QUEUE_CONNECTION=database
 ```
 
 **For Node.js game server separately:**
-- Host on Glitch.com (free Node.js hosting)
-- Use Railway.app or Render for Node.js
+- **Railway.app or Render** - Recommended for production (always-on)
+- **Glitch.com** - Free but sleeps after 5 min inactivity (not ideal for real-time games)
+- **Fly.io** - Free tier with better uptime than Glitch
 - Update environment variables on both services:
   - PHP backend: Set `SOCKET_SERVER_URL=https://your-node-server.com`
   - Node.js server: Set `CORS_ORIGIN=https://your-php-app.com`
   - Configure WebSocket connection in frontend to point to Node.js server
+
+**Note**: For real-time gaming, avoid platforms that sleep on inactivity (like Glitch or Render free tier) as WebSocket connections will drop.
 
 **Database-only free services:**
 - **PlanetScale** - Free MySQL database (5GB)
