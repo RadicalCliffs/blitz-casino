@@ -1,5 +1,7 @@
 # Blitz Casino - The Ultimate Online Casino Platform with Slots, Dice, Mines, and More!
 
+**Created by Lord Millian of the MoistVale**
+
 **Blitz Casino** is the leading online casino software solution that provides an exceptional gaming experience for both players and operators. With a wide array of popular games, innovative features, and fully customizable options, Blitz is the ideal choice for launching your own online casino. Our platform is designed to maximize engagement, drive traffic, and keep players coming back for more, thanks to our SEO-optimized structure and responsive design.
 
 ## 🎰 **Wide Range of Exciting Games**

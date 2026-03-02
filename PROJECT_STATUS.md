@@ -118,7 +118,7 @@ All dependencies have been installed successfully, the build system works perfec
 The application now supports **4 deployment strategies:**
 
 ### 1. Traditional Hosting (VPS/Dedicated Server)
-- **Stack:** PHP 7.4-8.2 + Node.js + MySQL + Redis
+- **Stack:** PHP 8.2+ + Node.js + MySQL + Redis
 - **Web Server:** Nginx or Apache with PHP-FPM
 - **Process Manager:** PM2 for Node.js server
 - **Best for:** Full control, all features enabled
@@ -218,7 +218,7 @@ http://localhost:8000
 
 ### Backend (PHP)
 - **Framework:** Laravel 7.30.6
-- **PHP Version:** 7.4 - 8.2 supported
+- **PHP Version:** 8.2+ required
 - **Database:** MySQL with Eloquent ORM
 - **Cache:** Redis via Predis
 - **Sessions:** Redis-backed for scalability
