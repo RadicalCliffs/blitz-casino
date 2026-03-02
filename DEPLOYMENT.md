@@ -37,7 +37,7 @@
 **Best for**: Full-featured deployment with PHP + Node.js
 
 ### Requirements:
-- PHP 8.2 or later (see PHP_COMPATIBILITY.md for details)
+- PHP 8.2.x (PHP 8.3+ not supported - see PHP_COMPATIBILITY.md for details)
 - MySQL 5.7+ or MySQL 8.x
 - Redis Server
 - Node.js 14+

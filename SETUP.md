@@ -4,7 +4,7 @@ This guide will help you set up and run Blitz Casino locally and deploy it to pr
 
 ## Prerequisites
 
-- **PHP** >= 7.2.5 (PHP 8.x recommended)
+- **PHP** 8.2.x (PHP 8.3+ not supported - see PHP_COMPATIBILITY.md)
 - **Composer** (PHP package manager)
 - **Node.js** >= 14.x (v24.x recommended)
 - **NPM** >= 6.x
@@ -239,9 +239,10 @@ npm run production
 
 ### PHP Version Issues
 
-If running PHP 8.x with Laravel 7:
-- Some deprecation warnings are expected but won't break functionality
-- Consider upgrading to Laravel 8+ for better PHP 8.x support
+This application requires PHP 8.2.x specifically:
+- Optimized for modern PHP 8.2 features
+- PHP 8.3+ is not supported due to Laravel 7 compatibility issues
+- For more details, see PHP_COMPATIBILITY.md
 
 ## Available NPM Scripts
 

@@ -2,61 +2,61 @@
 
 ## Supported PHP Versions
 
-This application requires PHP **8.2 or later**.
+This application requires PHP **8.2.x only** (PHP 8.3+ is not supported).
 
-The `composer.json` file explicitly declares support for PHP `^8.2` to ensure compatibility with modern deployment platforms like Railway.app and to maintain security and performance standards.
+The `composer.json` file explicitly declares support for PHP `>=8.2 <8.3` to ensure compatibility with modern deployment platforms like Railway.app while avoiding Laravel 7 compatibility issues with PHP 8.3+.
 
-## Why PHP 8.2+?
+## Why PHP 8.2.x?
 
-Laravel 7, while originally compatible with PHP 7.x, has been configured for this project to run on PHP 8.2+ for the following reasons:
+Laravel 7, while powerful, was released before PHP 8.3 and has compatibility issues with PHP 8.3's stricter type checking. To maintain a balance between modern PHP features and stability, this project requires:
 
-- **Modern Platform Support**: Railway and other modern deployment platforms optimize for PHP 8.2+
+- **Modern Platform Support**: Railway and other modern deployment platforms optimize for PHP 8.2
 - **Security**: PHP 7.x and 8.0/8.1 are end-of-life and no longer receive security updates
-- **Performance**: PHP 8.2+ offers significant performance improvements
-- **Dependency Compatibility**: The locked dependencies require PHP 8.2+
+- **Performance**: PHP 8.2 offers significant performance improvements over older versions
+- **Dependency Compatibility**: The locked dependencies require PHP 8.2
+- **Stability**: Laravel 7 is fully compatible with PHP 8.2 without modifications
 
-**Current Recommendation:** Use PHP 8.2 or PHP 8.3 for best compatibility and security.
+**Current Recommendation:** Use PHP 8.2 for production deployments.
 
 ### Solutions
 
-#### Option 1: Use PHP 8.2+ (Recommended)
+#### Use PHP 8.2 (Required)
 ```bash
-# Install PHP 8.2 or 8.3
-sudo apt-get install php8.2-cli php8.2-fpm
-# Or
-sudo apt-get install php8.3-cli php8.3-fpm
+# Install PHP 8.2
+sudo apt-get install php8.2-cli php8.2-fpm php8.2-mysql php8.2-redis php8.2-xml php8.2-mbstring php8.2-curl
 
-# Use specific PHP version
+# Use PHP 8.2
 php8.2 artisan serve
-# Or
-php8.3 artisan serve
 ```
 
-#### Option 2: Use Docker with PHP 8.2+
+#### Use Docker with PHP 8.2
 ```bash
-# Use official PHP 8.2 or 8.3 Docker image
+# Use official PHP 8.2 Docker image
 docker run -it --rm -v $(pwd):/app -w /app php:8.2-cli php artisan serve
 ```
+
+**Note:** PHP 8.3+ is not supported due to Laravel 7 compatibility issues with stricter type checking.
 
 ### Production Deployment
 
 The application works in production environments where:
-- PHP 8.2+ handles web requests via PHP-FPM
+- PHP 8.2.x handles web requests via PHP-FPM
 - The Node.js server handles game logic
 - Assets are pre-built with `npm run production`
 
 ### Current Status
 
-✅ **Web Application**: Works with PHP-FPM 8.2+  
+✅ **Web Application**: Works with PHP-FPM 8.2.x  
 ✅ **Node.js Game Server**: Fully functional  
 ✅ **Asset Building**: Works perfectly  
 ✅ **Database**: Compatible  
-✅ **Artisan Commands**: Fully functional on PHP 8.2+
+✅ **Artisan Commands**: Fully functional on PHP 8.2.x
+❌ **PHP 8.3+**: Not supported due to Laravel 7 type compatibility issues
 
 ### For Development
 
 Development requirements:
-1. PHP 8.2 or PHP 8.3
+1. PHP 8.2.x (PHP 8.3+ not supported)
 2. Composer 2.x
 3. Node.js 14+
 4. MySQL 5.7+ or 8.x
