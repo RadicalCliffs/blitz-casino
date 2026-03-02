@@ -1,7 +1,7 @@
 <?php
 
 // PHP 8.2+ Compatibility - Suppress Deprecation Notices
-// This prevents PHP 8.2+ strict type checking from failing Laravel 7.x
+// This prevents PHP 8.2+ return type compatibility warnings from failing Laravel 7.x
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 
 // Register a permissive error handler before Laravel's HandleExceptions
@@ -16,7 +16,6 @@ set_error_handler(function ($errno, $errstr, $errfile, $errline) {
     return false;
 }, E_ALL);
 
-// die('тест');
 session_start();
 
 

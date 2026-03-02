@@ -21,7 +21,7 @@ class HandleExceptions extends BaseHandleExceptions
         error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 
         // Register error handler that suppresses deprecations
-        set_error_handler(function ($level, $message, $file = '', $line = 0, $context = []) {
+        set_error_handler(function ($level, $message, $file = '', $line = 0) {
             // Suppress deprecation notices
             if ($level === E_DEPRECATED || $level === E_USER_DEPRECATED) {
                 return true;
