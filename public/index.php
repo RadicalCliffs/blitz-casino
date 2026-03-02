@@ -1,9 +1,21 @@
 <?php
 
-// Suppress PHP 8.5 deprecation warnings for Laravel 7 compatibility
+// PHP 8.2+ Compatibility - Suppress Deprecation Notices
+// This prevents PHP 8.2+ return type compatibility warnings from failing Laravel 7.x
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 
-// die('тест');
+// Register a permissive error handler before Laravel's HandleExceptions
+// This is necessary because Laravel 7.x's HandleExceptions converts
+// deprecation notices into exceptions, which breaks PHP 8.2+ compatibility
+set_error_handler(function ($errno, $errstr, $errfile, $errline) {
+    // Suppress E_DEPRECATED and E_USER_DEPRECATED errors
+    if ($errno === E_DEPRECATED || $errno === E_USER_DEPRECATED) {
+        return true;
+    }
+    // Let other errors fall through to the default handler
+    return false;
+}, E_ALL);
+
 session_start();
 
 
