@@ -37,7 +37,7 @@
 **Best for**: Full-featured deployment with PHP + Node.js
 
 ### Requirements:
-- PHP 7.2.5-7.x, 8.0.x, 8.1.x, or 8.2.x (Laravel 7 compatibility - see PHP_COMPATIBILITY.md)
+- PHP 8.2.x (PHP 8.3+ not supported - see PHP_COMPATIBILITY.md for details)
 - MySQL 5.7+ or MySQL 8.x
 - Redis Server
 - Node.js 14+
@@ -99,7 +99,7 @@ server {
     error_page 404 /index.php;
 
     location ~ \.php$ {
-        fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
+        fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
         fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
         include fastcgi_params;
     }
@@ -113,7 +113,7 @@ server {
 6. **Start Services**
 ```bash
 # Start PHP-FPM
-sudo systemctl start php8.0-fpm
+sudo systemctl start php8.2-fpm
 
 # Start Redis
 sudo systemctl start redis-server
@@ -224,7 +224,7 @@ Host PHP backend + Node.js server separately on:
 **Alternative: Using Docker** (for more control)
 ```dockerfile
 # Create Dockerfile in project root
-FROM php:8.1-apache
+FROM php:8.2-apache
 COPY . /var/www/html
 RUN composer install --no-dev
 RUN npm run production
@@ -392,7 +392,7 @@ VRF_ADMIN_SECRET=your-private-key
 ### Check Service Health:
 ```bash
 # PHP-FPM
-sudo systemctl status php8.0-fpm
+sudo systemctl status php8.2-fpm
 
 # Redis
 redis-cli ping

@@ -48,8 +48,8 @@ The Node.js game server needs to run separately. In Railway:
 ## Troubleshooting
 
 ### Build fails with PHP version error
-- Make sure composer.json has valid PHP version constraint
-- Current requirement: `^7.2.5|^8.0|^8.1|^8.2` (supports PHP 7.2.5+, 8.0, 8.1, and 8.2)
+- Make sure composer.json requires PHP `>=8.2 <8.3`
+- Current requirement: `>=8.2 <8.3` (PHP 8.2.x only, PHP 8.3+ not supported)
 - The nixpacks.toml configuration specifies PHP 8.2 for Railway deployments
 
 ### App not loading
